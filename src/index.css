@@ -1,0 +1,12 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --color-sf-blue: #00A1E0;
+  --color-neutral-dark: #032D60;
+}
+
+body {
+  background: #fff;
+}
