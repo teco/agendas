@@ -1,7 +1,9 @@
 import { useEffect, useState } from 'react'
 
 export function useOnlineStatus() {
-  const [isOnline, setIsOnline] = useState(navigator.onLine)
+  // Default true — navigator.onLine is unreliable on localhost and behind VPNs.
+  // We trust the online/offline events instead; assume online until told otherwise.
+  const [isOnline, setIsOnline] = useState(true)
 
   useEffect(() => {
     const up   = () => setIsOnline(true)
