@@ -3,6 +3,9 @@ import Header from './components/Header.jsx'
 import FilterBar from './components/FilterBar.jsx'
 import EventCard from './components/EventCard.jsx'
 import EventDetail from './components/EventDetail.jsx'
+import OfflineBanner from './components/OfflineBanner.jsx'
+import WhatsAppButton from './components/WhatsAppButton.jsx'
+import Toast from './components/Toast.jsx'
 import { events } from './data/events.js'
 import { useFavorites } from './hooks/useFavorites.js'
 import { formatEventDate } from './utils/date.js'
@@ -42,6 +45,7 @@ export default function App() {
   const [filter, setFilter] = useState('all')
   const [selectedEvent, setSelectedEvent] = useState(null)
   const [favorites, toggleFavorite] = useFavorites()
+  const [toastVisible, setToastVisible] = useState(false)
 
   const filteredEvents = useMemo(
     () => applyFilter(events, filter, favorites),
@@ -56,10 +60,16 @@ export default function App() {
     }
   }, [selectedEvent])
 
+  function showOfflineToast() {
+    setToastVisible(true)
+    setTimeout(() => setToastVisible(false), 3000)
+  }
+
   return (
     <>
-      <Header />
+      <Header onOfflineTap={showOfflineToast} />
       <FilterBar activeFilter={filter} onFilterChange={setFilter} />
+      <OfflineBanner />
 
       <main className="px-3 py-4" style={{ background: '#F9FAFB', minHeight: '50vh' }}>
         {filteredEvents.length === 0 ? (
@@ -97,6 +107,9 @@ export default function App() {
           onClose={() => setSelectedEvent(null)}
         />
       )}
+
+      <WhatsAppButton onOfflineTap={showOfflineToast} />
+      <Toast message="Requires internet connection" visible={toastVisible} />
     </>
   )
 }

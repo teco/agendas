@@ -1,6 +1,8 @@
 import { agendaTitle, instructions, teamContacts, heroImage } from '../config.js'
+import { useOnlineStatus } from '../hooks/useOnlineStatus.js'
 
-export default function Header() {
+export default function Header({ onOfflineTap }) {
+  const isOnline = useOnlineStatus()
   return (
     <header className="w-full bg-white border-b-2" style={{ borderColor: '#032D60' }}>
       <div className="px-4 py-3 space-y-3">
@@ -33,20 +35,39 @@ export default function Header() {
 
         {/* Row 4 — Team contacts */}
         <div className="flex justify-around">
-          {teamContacts.map((contact) => (
-            <a
-              key={contact.phone}
-              href={`https://wa.me/${contact.phone}?text=${encodeURIComponent(
-                `Hi ${contact.name}, I'm at Salesforce Connections and would like to connect.`
-              )}`}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="text-sm underline py-2"
-              style={{ color: '#00A1E0' }}
-            >
-              {contact.name}
-            </a>
-          ))}
+          {teamContacts.map((contact) => {
+            const waUrl = `https://wa.me/${contact.phone}?text=${encodeURIComponent(
+              `Hi ${contact.name}, I'm at Salesforce Connections and would like to connect.`
+            )}`
+            return isOnline ? (
+              <a
+                key={contact.phone}
+                href={waUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-sm underline py-2"
+                style={{ color: '#00A1E0' }}
+              >
+                {contact.name}
+              </a>
+            ) : (
+              <button
+                key={contact.phone}
+                type="button"
+                onClick={onOfflineTap}
+                className="text-sm underline py-2"
+                style={{
+                  color: '#00A1E0',
+                  opacity: 0.6,
+                  background: 'transparent',
+                  border: 'none',
+                  cursor: 'pointer',
+                }}
+              >
+                {contact.name}
+              </button>
+            )
+          })}
         </div>
       </div>
 
