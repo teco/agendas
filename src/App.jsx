@@ -4,6 +4,7 @@ import FilterBar from './components/FilterBar.jsx'
 import EventCard from './components/EventCard.jsx'
 import EventDetail from './components/EventDetail.jsx'
 import OfflineBanner from './components/OfflineBanner.jsx'
+import InstallHint from './components/InstallHint.jsx'
 import WhatsAppButton from './components/WhatsAppButton.jsx'
 import Toast from './components/Toast.jsx'
 import { events } from './data/events.js'
@@ -68,6 +69,7 @@ export default function App() {
   return (
     <>
       <Header onOfflineTap={showOfflineToast} />
+      <InstallHint />
       <FilterBar activeFilter={filter} onFilterChange={setFilter} />
       <OfflineBanner />
 
