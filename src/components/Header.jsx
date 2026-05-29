@@ -29,7 +29,7 @@ export default function Header({ onOfflineTap }) {
         <div className="flex justify-around">
           {teamContacts.map((contact) => {
             const waUrl = `https://wa.me/${contact.phone}?text=${encodeURIComponent(
-              `Hi ${contact.name}, I'm at Salesforce Connections and would like to connect.`
+              `Oi ${contact.name.split(' ')[0]}!`
             )}`
             return isOnline ? (
               <a

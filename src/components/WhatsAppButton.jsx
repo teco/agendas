@@ -9,7 +9,7 @@ function WhatsAppIcon() {
   )
 }
 
-const msg = "Hi, I'm at Salesforce Connections and would like to connect."
+const msg = "Oi Terence!"
 const url = `https://wa.me/${whatsappNumber}?text=${encodeURIComponent(msg)}`
 
 const btnStyle = {
