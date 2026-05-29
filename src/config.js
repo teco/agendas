@@ -12,7 +12,7 @@ export const instructions =
 
 // Persistent floating WhatsApp button — generic team inbox.
 // Phone in international format, no spaces, no symbols, no leading +.
-export const whatsappNumber = "5511998816284";
+export const whatsappNumber = "5511934079641";
 
 // Header contact row — three named team members, each opens a personalized wa.me link.
 // Phone in international format, no spaces, no symbols, no leading +.
