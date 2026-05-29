@@ -1,12 +1,17 @@
-const CATEGORY_META = {
-  suggested: { color: '#00A1E0', label: 'Session',      accent: null      },
-  also:      { color: '#5B8FA8', label: 'Alt. Session', accent: '#5B8FA8' },
-  oneOnOne:  { color: '#D97706', label: '1:1',          accent: '#D97706' },
-  social:    { color: '#7C3AED', label: 'Social',       accent: '#7C3AED' },
+import { categoryColors } from '../config.js'
+
+const CATEGORY_LABELS = {
+  suggested: null,                // no label for plain sessions
+  // TODO: if "Alternative to [parent title]" is needed, EventCard would need to
+  // receive the full events array and find the event sharing the same date+startTime.
+  also:      'Alternative session',
+  oneOnOne:  'Confirmed 1:1',
+  social:    'Get together',
 }
 
 export default function EventCard({ event, isFavorited, onToggleFavorite, onSelect }) {
-  const meta = CATEGORY_META[event.eventCategory] || CATEGORY_META.suggested
+  const { accent, tint } = categoryColors[event.eventCategory] || categoryColors.suggested
+  const label = CATEGORY_LABELS[event.eventCategory] || null
 
   const locationParts = []
   if (event.room) locationParts.push(event.room)
@@ -23,11 +28,16 @@ export default function EventCard({ event, isFavorited, onToggleFavorite, onSele
   return (
     <div
       onClick={() => onSelect(event)}
-      className="relative bg-white rounded-lg shadow-sm mb-2 px-4 py-3 cursor-pointer hover:bg-slate-50"
+      className="relative rounded-lg shadow-sm mb-2 px-4 py-3 cursor-pointer"
       style={{
-        borderLeft: meta.accent ? `4px solid ${meta.accent}` : undefined,
+        background: tint,
+        borderLeft: accent ? `4px solid ${accent}` : undefined,
+        // Darken slightly on hover without overriding the tint with a fixed bg class
       }}
+      onMouseEnter={(e) => { e.currentTarget.style.filter = 'brightness(0.97)' }}
+      onMouseLeave={(e) => { e.currentTarget.style.filter = '' }}
     >
+      {/* Star — top-right */}
       <button
         type="button"
         onClick={handleStarClick}
@@ -47,18 +57,14 @@ export default function EventCard({ event, isFavorited, onToggleFavorite, onSele
         {isFavorited ? '★' : '☆'}
       </button>
 
-      <div className="flex items-center justify-between pr-10">
-        <span className="text-sm" style={{ color: '#6B7280' }}>
+      {/* Row 1 — time */}
+      <div className="pr-10">
+        <span className="text-sm" style={{ color: '#374151' }}>
           {event.startTime}–{event.endTime}
-        </span>
-        <span
-          className="text-xs px-2 py-0.5 rounded-full text-white"
-          style={{ background: meta.color }}
-        >
-          {meta.label}
         </span>
       </div>
 
+      {/* Row 2 — title */}
       <div className="mt-1 pr-10 font-semibold" style={{ color: '#032D60' }}>
         {event.title}
         {event.url && (
@@ -66,17 +72,29 @@ export default function EventCard({ event, isFavorited, onToggleFavorite, onSele
         )}
       </div>
 
+      {/* Row 2b — category label (non-suggested only) */}
+      {label && (
+        <div className="text-xs mt-0.5" style={{ color: '#032D60', opacity: 0.75 }}>
+          {label}
+        </div>
+      )}
+
+      {/* Row 3 — location + indicators */}
       {showRow3 && (
-        <div className="mt-1 flex items-center flex-wrap gap-2 text-sm" style={{ color: '#6B7280' }}>
+        <div className="mt-1 flex items-center flex-wrap gap-2 text-sm" style={{ color: '#374151' }}>
           {hasLocation && <span>{locationParts.join(' · ')}</span>}
           {event.registrationRequired && (
+            // Dark amber text on light amber bg — 6.53:1, passes WCAG AA
             <span
-              className="text-xs px-2 py-0.5 rounded text-white"
-              style={{ background: '#D97706' }}
+              className="text-xs px-2 py-0.5 rounded"
+              style={{ color: '#92400E', background: '#FEF3C7' }}
             >
               Reg. required
             </span>
           )}
+          {/* NOTE: on oneOnOne cards the amber tint (#fff8ec) and warning icon (#D97706)
+              share hue. Currently no oneOnOne event carries a transitionWarning so this
+              isn't user-visible. If that changes, distinguish with a border or darker icon. */}
           {event.transitionWarning && (
             <span style={{ color: '#D97706' }} aria-label="Transition warning">⚠</span>
           )}

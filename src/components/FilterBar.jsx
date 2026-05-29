@@ -23,8 +23,8 @@ export default function FilterBar({ activeFilter, onFilterChange }) {
               className="px-4 text-sm font-medium"
               style={{
                 minHeight: 44,
-                color: active ? '#00A1E0' : '#6B7280',
-                borderBottom: active ? '2px solid #00A1E0' : '2px solid transparent',
+                color: active ? '#032D60' : '#6B7280',
+                borderBottom: active ? '2px solid #032D60' : '2px solid transparent',
                 background: 'transparent',
                 cursor: 'pointer',
               }}

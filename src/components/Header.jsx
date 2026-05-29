@@ -46,7 +46,7 @@ export default function Header({ onOfflineTap }) {
                 target="_blank"
                 rel="noopener noreferrer"
                 className="text-sm underline py-2"
-                style={{ color: '#00A1E0' }}
+                style={{ color: '#032D60' }}
               >
                 {contact.name}
               </a>
@@ -57,7 +57,7 @@ export default function Header({ onOfflineTap }) {
                 onClick={onOfflineTap}
                 className="text-sm underline py-2"
                 style={{
-                  color: '#00A1E0',
+                  color: '#032D60',
                   opacity: 0.6,
                   background: 'transparent',
                   border: 'none',

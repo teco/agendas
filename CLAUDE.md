@@ -67,12 +67,15 @@ This is the only file the account team needs to touch. Every object in the `even
 
 ### Category colors
 
-| Category | Badge label | Accent color |
-|----------|-------------|--------------|
-| `suggested` | Session | `#00A1E0` (Salesforce blue) — no left border on card |
-| `also` | Alt. Session | `#5B8FA8` muted blue |
-| `oneOnOne` | 1:1 | `#D97706` amber |
-| `social` | Social | `#7C3AED` purple |
+Tokens live in `categoryColors` in `src/config.js` — edit there, not in components.
+Labels must use dark text (`#032D60`); accent colors fail WCAG AA on their own tints.
+
+| Category | Card label | Accent (border) | Tint (bg) |
+|----------|-----------|-----------------|-----------|
+| `suggested` | *(none)* | none | `#ffffff` |
+| `also` | Alternative session | `#19a7b3` teal | `#f0fbfc` |
+| `oneOnOne` | Confirmed 1:1 | `#ff9200` amber | `#fff8ec` |
+| `social` | Get together | `#8a4fd3` purple | `#f7f2fd` |
 
 ## Editing Config — src/config.js
 
