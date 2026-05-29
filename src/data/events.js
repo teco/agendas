@@ -14,9 +14,9 @@
  *   id: string,
  *   eventCategory: "suggested" | "also" | "oneOnOne" | "social",
  *   title: string,
- *   date: string,              // "YYYY-MM-DD"
- *   startTime: string,         // "HH:MM" 24-hour
- *   endTime: string,           // "HH:MM" 24-hour
+ *   date: string,              // "YYYY-MM-DD" — America/Chicago wall-clock date
+ *   startTime: string,         // "HH:MM" 24-hour — America/Chicago wall-clock time
+ *   endTime: string,           // "HH:MM" 24-hour — America/Chicago wall-clock time
  *   room: string|null,
  *   area: string|null,
  *   type: string|null,
@@ -26,7 +26,11 @@
  *   registrationRequired: bool,
  *   transitionWarning: string|null,
  *   mapsUrl: string|null,      // null for McCormick Place main venue; deep link for off-site
- *   url: string|null,          // Salesforce Connections session page URL; null if not available
+ *   url: string|null,          // Salesforce Connections session page URL; null if not available.
+ *                              //   ONLY populated for public CNX sessions — null for 1:1s,
+ *                              //   team/Tower sessions, LATAM/SE sessions, and social events.
+ *   spotifyUrl: string|null,   // optional playlist link; null for all events except those that
+ *                              //   carry a curated playlist (currently only the CNX Party).
  * }
  */
 export const events = [
@@ -49,8 +53,9 @@ export const events = [
     participants: null,
     registrationRequired: false,
     transitionWarning: null,
-    mapsUrl: "https://maps.google.com/?q=Salesforce+Tower+Chicago",
+    mapsUrl: "https://maps.google.com/?q=333+W+Wolf+Point+Plaza,+Chicago,+IL+60654",
     url: null,
+    spotifyUrl: null,
   },
   {
     id: "tue-personalization-roadmap",
@@ -69,8 +74,9 @@ export const events = [
     participants: null,
     registrationRequired: false,
     transitionWarning: null,
-    mapsUrl: "https://maps.google.com/?q=Salesforce+Tower+Chicago",
+    mapsUrl: "https://maps.google.com/?q=333+W+Wolf+Point+Plaza,+Chicago,+IL+60654",
     url: null,
+    spotifyUrl: null,
   },
   {
     id: "tue-marketing-ops-governance",
@@ -89,8 +95,9 @@ export const events = [
     participants: null,
     registrationRequired: false,
     transitionWarning: null,
-    mapsUrl: "https://maps.google.com/?q=Salesforce+Tower+Chicago",
+    mapsUrl: "https://maps.google.com/?q=333+W+Wolf+Point+Plaza,+Chicago,+IL+60654",
     url: null,
+    spotifyUrl: null,
   },
   {
     id: "tue-latam-welcome-party",
@@ -107,8 +114,9 @@ export const events = [
     participants: null,
     registrationRequired: false,
     transitionWarning: null,
-    mapsUrl: "https://maps.google.com/?q=Navy+Pier+Chicago",
+    mapsUrl: "https://maps.google.com/?q=Navy+Pier,+600+E+Grand+Ave,+Chicago,+IL+60611",
     url: null,
+    spotifyUrl: null,
   },
 
   // ============================================================
@@ -131,7 +139,8 @@ export const events = [
     registrationRequired: true,
     transitionWarning: null,
     mapsUrl: null,
-    url: null,
+    url: "https://reg.salesforce.com/flow/plus/cnx26/sessioncatalog/page/catalog/session/1772743942161001QFhN",
+    spotifyUrl: null,
   },
   {
     id: "wed-data-foundation",
@@ -150,7 +159,8 @@ export const events = [
     registrationRequired: false,
     transitionWarning: null,
     mapsUrl: null,
-    url: null,
+    url: "https://reg.salesforce.com/flow/plus/cnx26/sessioncatalog/page/catalog/session/1772816822432001D954",
+    spotifyUrl: null,
   },
   {
     id: "wed-golden-trio",
@@ -170,7 +180,8 @@ export const events = [
     transitionWarning:
       "Less than 15 minutes between this session (ends 9:20 AM) and the FINS Growth Blueprint roundtable (ends 9:30 AM). Plan transitions accordingly.",
     mapsUrl: null,
-    url: null,
+    url: "https://reg.salesforce.com/flow/plus/cnx26/sessioncatalog/page/catalog/session/1772742602864001E4VH",
+    spotifyUrl: null,
   },
   {
     id: "wed-main-keynote",
@@ -189,7 +200,8 @@ export const events = [
     registrationRequired: false,
     transitionWarning: null,
     mapsUrl: null,
-    url: null,
+    url: "https://reg.salesforce.com/flow/plus/cnx26/sessioncatalog/page/catalog/session/1771274865438001GraI",
+    spotifyUrl: null,
   },
   {
     id: "wed-1on1-mc-next-roadmap",
@@ -209,6 +221,7 @@ export const events = [
     transitionWarning: null,
     mapsUrl: null,
     url: null,
+    spotifyUrl: null,
   },
   {
     id: "wed-slack-for-marketing",
@@ -227,7 +240,8 @@ export const events = [
     registrationRequired: false,
     transitionWarning: null,
     mapsUrl: null,
-    url: null,
+    url: "https://reg.salesforce.com/flow/plus/cnx26/sessioncatalog/page/catalog/session/1774986281652001fUzX",
+    spotifyUrl: null,
   },
   {
     id: "wed-prove-marketing-roi",
@@ -246,7 +260,8 @@ export const events = [
     registrationRequired: false,
     transitionWarning: null,
     mapsUrl: null,
-    url: null,
+    url: "https://reg.salesforce.com/flow/plus/cnx26/sessioncatalog/page/catalog/session/1772735172889001bP7a",
+    spotifyUrl: null,
   },
   {
     id: "wed-autonomous-ai-agents",
@@ -265,7 +280,8 @@ export const events = [
     registrationRequired: false,
     transitionWarning: null,
     mapsUrl: null,
-    url: null,
+    url: "https://reg.salesforce.com/flow/plus/cnx26/sessioncatalog/page/catalog/session/1772644511920001r0qn",
+    spotifyUrl: null,
   },
   {
     id: "wed-messaging-age-of-ai",
@@ -285,7 +301,8 @@ export const events = [
     transitionWarning:
       "Less than 15 minutes between this session (starts 2:00 PM) and the Autonomous AI Agents session (ends 1:50 PM). Allow extra time to move between rooms.",
     mapsUrl: null,
-    url: null,
+    url: "https://reg.salesforce.com/flow/plus/cnx26/sessioncatalog/page/catalog/session/1772735155362001bBIa",
+    spotifyUrl: null,
   },
   {
     id: "wed-tips-tricks-agentforce",
@@ -304,7 +321,8 @@ export const events = [
     registrationRequired: false,
     transitionWarning: null,
     mapsUrl: null,
-    url: null,
+    url: "https://reg.salesforce.com/flow/plus/cnx26/sessioncatalog/page/catalog/session/1773089424504001p7gD",
+    spotifyUrl: null,
   },
   {
     id: "wed-nova-era-orquestracao",
@@ -324,6 +342,7 @@ export const events = [
     transitionWarning: null,
     mapsUrl: null,
     url: null,
+    spotifyUrl: null,
   },
   {
     id: "wed-party-at-cnx",
@@ -341,8 +360,10 @@ export const events = [
     participants: null,
     registrationRequired: false,
     transitionWarning: null,
-    mapsUrl: "https://maps.google.com/?q=Wintrust+Arena+Chicago",
+    mapsUrl: "https://maps.google.com/?q=Wintrust+Arena,+200+E+Cermak+Road,+Chicago,+IL+60616",
     url: null,
+    spotifyUrl:
+      "https://open.spotify.com/playlist/007fYN7yODZYCvpf8LS5dP?si=TVIqLlyTQDq13kdf9bVEdA",
   },
 
   // ============================================================
@@ -366,6 +387,7 @@ export const events = [
     transitionWarning: null,
     mapsUrl: null,
     url: null,
+    spotifyUrl: null,
   },
   {
     id: "thu-agentforce-marketing-keynote",
@@ -384,7 +406,8 @@ export const events = [
     registrationRequired: false,
     transitionWarning: null,
     mapsUrl: null,
-    url: null,
+    url: "https://reg.salesforce.com/flow/plus/cnx26/sessioncatalog/page/catalog/session/1774363124874001fdFq",
+    spotifyUrl: null,
   },
   {
     id: "thu-scale-retention-fins",
@@ -403,7 +426,8 @@ export const events = [
     registrationRequired: false,
     transitionWarning: null,
     mapsUrl: null,
-    url: null,
+    url: "https://reg.salesforce.com/flow/plus/cnx26/sessioncatalog/page/catalog/session/1772825684502001VREz",
+    spotifyUrl: null,
   },
   {
     id: "thu-special-session-inter",
@@ -423,6 +447,7 @@ export const events = [
     transitionWarning: null,
     mapsUrl: "https://maps.google.com/?q=Salesforce+Innovation+Center+Chicago",
     url: null,
+    spotifyUrl: null,
   },
   {
     id: "thu-beyond-the-campaign",
@@ -441,6 +466,7 @@ export const events = [
     registrationRequired: false,
     transitionWarning: null,
     mapsUrl: null,
-    url: null,
+    url: "https://reg.salesforce.com/flow/plus/cnx26/sessioncatalog/page/catalog/session/1772547858636001hbvZ",
+    spotifyUrl: null,
   },
 ];

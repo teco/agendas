@@ -266,6 +266,17 @@ export default function EventDetail({ event, isFavorited, onToggleFavorite, onCl
                 >
                   Add to Outlook
                 </a>
+                {event.spotifyUrl && (
+                  <a
+                    href={event.spotifyUrl}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="rounded px-4 py-2 text-sm"
+                    style={{ background: '#1A7F43', color: '#fff', textDecoration: 'none', display: 'inline-block' }}
+                  >
+                    Party playlist ♪
+                  </a>
+                )}
               </>
             ) : (
               <>
@@ -287,6 +298,17 @@ export default function EventDetail({ event, isFavorited, onToggleFavorite, onCl
                 >
                   Add to Outlook
                 </button>
+                {event.spotifyUrl && (
+                  <button
+                    type="button"
+                    disabled
+                    title="Requires internet connection"
+                    className="rounded px-4 py-2 text-sm"
+                    style={{ background: '#1A7F43', color: '#fff', opacity: 0.5, cursor: 'not-allowed' }}
+                  >
+                    Party playlist ♪
+                  </button>
+                )}
               </>
             )}
           </div>

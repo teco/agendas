@@ -16,9 +16,9 @@ export const whatsappNumber = "15551234567";
 // Header contact row — three named team members, each opens a personalized wa.me link.
 // Phone in international format, no spaces, no symbols, no leading +.
 export const teamContacts = [
-  { name: "Alex Johnson", phone: "15551234567" },
-  { name: "Maria Santos", phone: "15557654321" },
-  { name: "David Park",   phone: "15559876543" },
+  { name: "Terence Reis",    phone: "5511934079641" },
+  { name: "Fabiana Maniero", phone: "5511920227247" },
+  { name: "Léo Boaventura",  phone: "5511989214117" },
 ];
 
 // Hero image displayed in the header between the contact row and the event list.
