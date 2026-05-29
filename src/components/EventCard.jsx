@@ -59,7 +59,7 @@ export default function EventCard({ event, isFavorited, onToggleFavorite, onSele
 
       {/* Row 1 — time */}
       <div className="pr-10">
-        <span className="text-sm" style={{ color: '#6B7280' }}>
+        <span className="text-sm" style={{ color: '#374151' }}>
           {event.startTime}–{event.endTime}
         </span>
       </div>
@@ -81,7 +81,7 @@ export default function EventCard({ event, isFavorited, onToggleFavorite, onSele
 
       {/* Row 3 — location + indicators */}
       {showRow3 && (
-        <div className="mt-1 flex items-center flex-wrap gap-2 text-sm" style={{ color: '#6B7280' }}>
+        <div className="mt-1 flex items-center flex-wrap gap-2 text-sm" style={{ color: '#374151' }}>
           {hasLocation && <span>{locationParts.join(' · ')}</span>}
           {event.registrationRequired && (
             // Dark amber text on light amber bg — 6.53:1, passes WCAG AA
