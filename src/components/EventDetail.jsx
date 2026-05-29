@@ -26,23 +26,39 @@ export default function EventDetail({ event, isFavorited, onToggleFavorite, onCl
   const hasLocation = locationParts.length > 0
   const location = locationParts.join(', ')
 
-  const dateCompact  = event.date.replace(/-/g, '')
-  const startCompact = event.startTime.replace(':', '')
-  const endCompact   = event.endTime.replace(':', '')
+  // Event times in events.js are America/Chicago wall-clock (CDT, UTC-5) for June 2-4 2026.
+  // We convert to UTC by adding 5h and emit with a 'Z' suffix so calendar apps pin the
+  // correct absolute time regardless of the user's device timezone (many attendees' phones
+  // are on Brasília time, UTC-3). Offset is hardcoded: no DST transition occurs in this window.
+  // Do NOT use runtime-timezone-dependent conversion (e.g. Date.toISOString on a local-parsed
+  // date) — that would apply the host/device offset and break this.
+  function toUtcComponents(date, time) {
+    const [y, mo, d]  = date.split('-').map(Number)
+    const [h, mi]     = time.split(':').map(Number)
+    const utcMs       = Date.UTC(y, mo - 1, d, h + 5, mi)
+    const dt          = new Date(utcMs)
+    const pad         = (n) => String(n).padStart(2, '0')
+    return {
+      compact: `${dt.getUTCFullYear()}${pad(dt.getUTCMonth() + 1)}${pad(dt.getUTCDate())}T${pad(dt.getUTCHours())}${pad(dt.getUTCMinutes())}00Z`,
+      iso:     `${dt.getUTCFullYear()}-${pad(dt.getUTCMonth() + 1)}-${pad(dt.getUTCDate())}T${pad(dt.getUTCHours())}:${pad(dt.getUTCMinutes())}:00Z`,
+    }
+  }
+
+  const startUtc = toUtcComponents(event.date, event.startTime)
+  const endUtc   = toUtcComponents(event.date, event.endTime)
 
   const gcalUrl =
     'https://calendar.google.com/calendar/render?action=TEMPLATE' +
     '&text='     + encodeURIComponent(event.title) +
-    '&dates='    + dateCompact + 'T' + startCompact + '00/' +
-                   dateCompact + 'T' + endCompact   + '00' +
+    '&dates='    + startUtc.compact + '/' + endUtc.compact +
     '&details='  + encodeURIComponent(stripHtml(event.summary)) +
     '&location=' + encodeURIComponent(location)
 
   const outlookUrl =
     'https://outlook.live.com/calendar/0/deeplink/compose' +
     '?subject='  + encodeURIComponent(event.title) +
-    '&startdt='  + event.date + 'T' + event.startTime + ':00' +
-    '&enddt='    + event.date + 'T' + event.endTime   + ':00' +
+    '&startdt='  + startUtc.iso +
+    '&enddt='    + endUtc.iso +
     '&body='     + encodeURIComponent(stripHtml(event.summary)) +
     '&location=' + encodeURIComponent(location)
 
