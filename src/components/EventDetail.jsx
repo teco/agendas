@@ -1,11 +1,12 @@
 import { formatEventDate } from '../utils/date.js'
 import { useOnlineStatus } from '../hooks/useOnlineStatus.js'
+import { categoryColors } from '../config.js'
 
-const CATEGORY_META = {
-  suggested: { color: '#00A1E0', label: 'Session'      },
-  also:      { color: '#5B8FA8', label: 'Alt. Session' },
-  oneOnOne:  { color: '#D97706', label: '1:1'          },
-  social:    { color: '#7C3AED', label: 'Social'       },
+const CATEGORY_LABELS = {
+  suggested: 'Session',
+  also:      'Alternative session',
+  oneOnOne:  'Confirmed 1:1',
+  social:    'Get together',
 }
 
 const stripHtml = (html) => (html ? html.replace(/<[^>]*>/g, '') : '')
@@ -18,7 +19,8 @@ const calBtnBase = {
 
 export default function EventDetail({ event, isFavorited, onToggleFavorite, onClose }) {
   const isOnline = useOnlineStatus()
-  const meta = CATEGORY_META[event.eventCategory] || CATEGORY_META.suggested
+  const { accent, tint } = categoryColors[event.eventCategory] || categoryColors.suggested
+  const label = CATEGORY_LABELS[event.eventCategory] || 'Session'
 
   const locationParts = [event.room, event.area].filter(Boolean)
   const hasLocation = locationParts.length > 0
@@ -122,13 +124,17 @@ export default function EventDetail({ event, isFavorited, onToggleFavorite, onCl
             </button>
           </div>
 
-          {/* Badge */}
+          {/* Category badge — dark text on tint with accent border; avoids white-on-color contrast failure */}
           <div className="mt-2">
             <span
-              className="text-xs px-2 py-0.5 rounded-full text-white"
-              style={{ background: meta.color }}
+              className="text-xs px-2 py-0.5 rounded-full"
+              style={{
+                color: '#032D60',
+                background: tint,
+                border: accent ? `1px solid ${accent}` : '1px solid #D1D5DB',
+              }}
             >
-              {meta.label}
+              {label}
             </span>
           </div>
 
