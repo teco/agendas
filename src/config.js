@@ -18,7 +18,7 @@ export const whatsappNumber = "5511934079641";
 // Phone in international format, no spaces, no symbols, no leading +.
 export const teamContacts = [
   { name: "Terence Reis",    phone: "5511934079641" },
-  { name: "Fabiana Maniero", phone: "5511920227247" },
+  { name: "Fabiana Maniero", phone: "5511930227247" },
   { name: "Léo Boaventura",  phone: "5511989214117" },
 ];
 
