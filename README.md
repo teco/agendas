@@ -1,6 +1,6 @@
-# Inter @ Salesforce Connections 2026
+# Clients @ Salesforce Events 2026
 
-Mobile-first PWA event agenda app for the Inter account team at Salesforce Connections 2026 in Chicago.
+Mobile-first PWA event agenda app for clients account team at Salesforce events.
 
 ## Stack
 
