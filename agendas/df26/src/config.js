@@ -23,3 +23,10 @@ export const categoryColors = {
   "efficiency":        { accent: "#2E844A", tint: "#EBF5EE" },
 };
 export const labelText = "#032D60";
+export const categoryLabels = {
+  "unified-data":       "Unified Customer Data",
+  "agentforce-mktg":   "Agentforce Marketing",
+  "ai-journeys":       "AI Journeys",
+  "media-attribution": "Media & Attribution",
+  "efficiency":        "Operational Efficiency",
+};

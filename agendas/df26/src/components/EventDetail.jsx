@@ -1,16 +1,8 @@
-import { categoryColors, labelText } from '../config.js'
-
-const CATEGORY_LABELS = {
-  "unified-data":       "Unified Customer Data",
-  "agentforce-mktg":   "Agentforce Marketing",
-  "ai-journeys":       "AI Journeys",
-  "media-attribution": "Media & Attribution",
-  "efficiency":        "Operational Efficiency",
-}
+import { categoryColors, labelText, categoryLabels } from '../config.js'
 
 export default function EventDetail({ event, isFavorited, onToggleFavorite, onClose }) {
   const { accent, tint } = categoryColors[event.eventCategory] || { accent: null, tint: '#ffffff' }
-  const label = CATEGORY_LABELS[event.eventCategory] || 'Session'
+  const label = categoryLabels[event.eventCategory] || 'Session'
 
   return (
     <div
