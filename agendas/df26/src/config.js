@@ -1,15 +1,14 @@
 // src/config.js
-// heroImage is null until hero.png is dropped into src/assets/ and the import below is uncommented.
-// import heroImg from './assets/hero.png'
+import heroImg from './assets/Hero_DF26.png'
 
 export const agendaTitle   = "You @ Dreamforce 2026";
 export const clientName    = "Dreamforce 2026";
 export const instructions  = "Tap any session to read details. Star sessions to save them to Interested.";
-export const whatsappNumber = "5511999999999"; // not rendered in this draft
+export const whatsappNumber = "5511934079641"; // not rendered in this draft
 export const teamContacts  = [
-  { name: "Terence Reis", phone: "5511999999999" },
+  { name: "Terence Reis", phone: "5511934079641" },
 ];
-export const heroImage = null; // set to heroImg after dropping hero.png into src/assets/
+export const heroImage = heroImg;
 export const colors = {
   salesforceBlue: "#0176D3",
   neutralDark:    "#032D60",
