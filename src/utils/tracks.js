@@ -1,6 +1,6 @@
 // An occurrence can have multiple track records. Keep source IDs intact and
 // use one existing ID for its saved state. Different dates/times stay distinct.
-export function createTrackAgenda(events, tracks = []) {
+export function createTrackAgenda(events, tracks = [], favoriteAliases = {}) {
   const enabled = tracks.length > 0
   const validTrack = value => tracks.some(track => track.id === value) ? value : null
   const groups = new Map()
@@ -11,7 +11,11 @@ export function createTrackAgenda(events, tracks = []) {
   }
   const byId = new Map()
   for (const group of groups.values()) for (const event of group) byId.set(event.id, group)
-  const favoriteId = id => byId.get(id)?.[0].id ?? id
+  // Explicit aliases join the same occurrence across collections without changing source IDs.
+  const favoriteId = id => {
+    const canonicalId = favoriteAliases[id] ?? id
+    return byId.get(canonicalId)?.[0].id ?? canonicalId
+  }
   const normalizeFavorites = favorites => new Set([...favorites].map(favoriteId))
   return {
     enabled, tracks, validTrack, favoriteId, normalizeFavorites,

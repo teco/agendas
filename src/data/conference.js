@@ -1,7 +1,7 @@
 import { events } from './events.js';
 import { client } from '#client-config';
 import { createTrackAgenda } from '../utils/tracks.js';
-export const trackAgenda = createTrackAgenda(events, client.tracks);
+export const trackAgenda = createTrackAgenda(events, client.tracks, client.favoriteAliases);
 import { brazilSessions } from './brazil.js';
 export const conferenceCopy = {
   views: [
@@ -23,6 +23,6 @@ export const conferenceCopy = {
 export const liveSessions = [...events, ...brazilSessions];
 export function sessionsForView(view, favorites = new Set(), track = null) {
   if (view === 'brazil') return brazilSessions;
-  if (view === 'mySchedule') return [...trackAgenda.saved(favorites, track), ...brazilSessions.filter(event => favorites.has(event.id))];
+  if (view === 'mySchedule') return [...trackAgenda.saved(favorites, track), ...brazilSessions.filter(event => favorites.has(event.id) && trackAgenda.favoriteId(event.id) === event.id)];
   return trackAgenda.forTrack(track);
 }
