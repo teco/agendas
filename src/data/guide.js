@@ -1,3 +1,5 @@
+import { sundayDinnerPolicy } from './sundayDinner.js'
+
 // Shared landing/guide summaries; Today references these records by ID.
 export const homeCopy = {
   eyebrow: 'YOUR WEEK, WITH SALESFORCE',
@@ -25,7 +27,7 @@ export const sfCopy = {
   imageAlt: 'San Francisco waterfront and Bay Bridge at dusk',
   sundayLabel: 'SUNDAY, SEPTEMBER 13',
   sundayTitle: 'A day for the city.',
-  sundayDescription: "There’s time to enjoy the city before the conference begins. Spend Sunday out exploring or at the ballpark, and join us for dinner at EPIC Steak that evening.",
+  sundayDescription: sundayDinnerPolicy.introduction,
   sundayAction: 'Explore Sunday',
   guideTitle: 'Make the most of your free time',
   freeTimeTitle: 'If you have time',
@@ -40,7 +42,7 @@ export const sfSections = [
     "id": "sunday",
     "path": "/sf/sunday",
     "title": "Sunday in San Francisco",
-    "description": "There’s time to enjoy the city before the conference begins. Spend Sunday out exploring or at the ballpark, and join us for dinner at EPIC Steak that evening.",
+    "description": sundayDinnerPolicy.introduction,
     "group": "featured",
     "number": "01"
   },

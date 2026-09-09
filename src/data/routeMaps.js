@@ -1,5 +1,7 @@
+import { sundayDinnerPolicy } from './sundayDinner.js'
+
 // Approved content integrated September 2026. Preserve record IDs.
-export const routeMaps = {
+const baseRouteMaps = {
   "anchors": {
     "ferry": [
       "Ferry Building",
@@ -242,3 +244,5 @@ export const routeMaps = {
     }
   ]
 };
+
+export const routeMaps = sundayDinnerPolicy.routeMaps(baseRouteMaps)

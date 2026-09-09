@@ -1,6 +1,8 @@
+import { sundayDinnerPolicy } from './sundayDinner.js'
+
 // UI/navigation composition only. Entity copy is resolved from content IDs.
 export const sunday = {
-  date: '2026-09-13', dinnerId: 'sunday-dinner',
+  date: '2026-09-13', dinnerId: sundayDinnerPolicy.enabled ? 'sunday-dinner' : null,
   choices: [
     { id: 'classic', number: '01', path: '/sf/sunday/classic', content: { kind: 'route', id: 'sunday-classic' }, action: 'See the full route', tone: 'city' },
     { id: 'giants', number: '02', path: '/sf/sunday/giants', content: { kind: 'activity', id: 'sunday-giants' }, action: 'See the Giants plan', tone: 'conference' },
@@ -11,7 +13,7 @@ export const sunday = {
 export const sundayCopy = {
   "eyebrow": "SUNDAY IN SAN FRANCISCO",
   "title": "How do you want to spend Sunday?",
-  "introduction": "There’s time to enjoy the city before the conference begins. Spend Sunday out exploring or at the ballpark, and join us for dinner at EPIC Steak that evening.",
+  "introduction": sundayDinnerPolicy.introduction,
   "draft": "The outline is ready to explore. Times, meeting points, and final details are still being confirmed.",
   "back": "Back to Sunday",
   "dinner": "Together for dinner",

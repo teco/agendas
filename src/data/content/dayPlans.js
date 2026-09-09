@@ -1,6 +1,8 @@
+import { sundayDinnerPolicy } from '../sundayDinner.js'
+
 // Trip-day composition contains references only. Editorial copy stays at its source.
 /** @type {import('./schema.js').DayPlan[]} */
-export const dayPlans = [
+const baseDayPlans = [
   { date: '2026-09-12', primary: [], secondary: [], evening: [], notices: [] },
   {
     date: '2026-09-13',
@@ -24,3 +26,5 @@ export const dayPlans = [
   { date: '2026-09-18', primary: [{ kind: 'guide', id: 'friday' }], secondary: [], evening: [], notices: [] },
   { date: '2026-09-19', primary: [], secondary: [], evening: [], notices: [] },
 ]
+
+export const dayPlans = sundayDinnerPolicy.dayPlans(baseDayPlans)

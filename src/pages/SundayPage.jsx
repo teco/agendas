@@ -9,6 +9,7 @@ import SharedPlanCard from '../components/SharedPlanCard.jsx'
 import SundayPreference from '../components/SundayPreference.jsx'
 
 const sources = createContentSources()
+const dinner = sources.sharedPlan.find(plan => plan.id === sunday.dinnerId)
 export default function SundayPage() {
   return (
     <div className="companion-page sunday-page">
@@ -19,7 +20,7 @@ export default function SundayPage() {
         <p className="trip-dates"><time dateTime={sunday.date}>{formatEventDate(sunday.date)}</time></p>
         <p className="guide-lede">{copy.introduction}</p>
       </header>
-      <section className="sunday-dinner"><h2>{copy.dinner}</h2><p>{copy.dinnerIntro}</p><SharedPlanCard plan={sources.sharedPlan.find(plan => plan.id === sunday.dinnerId)} sources={sources} /></section>
+      {dinner && <section className="sunday-dinner"><h2>{copy.dinner}</h2><p>{copy.dinnerIntro}</p><SharedPlanCard plan={dinner} sources={sources} /></section>}
       <section className="sunday-choices" aria-label={copy.choices}>
         {sunday.choices.map(choice => {
           const content = resolveContent(choice.content, sources)

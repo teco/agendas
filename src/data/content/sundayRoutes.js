@@ -1,3 +1,5 @@
+import { sundayDinnerPolicy } from '../sundayDinner.js'
+
 export const sundayStops = {
   "ferry": {
     "placeId": "ferry-building",
@@ -79,7 +81,7 @@ export const sundayStops = {
     "durationMinutes": 20
   }
 };
-export const routes = [
+const baseRoutes = [
   { ...{
   "id": "sunday-classic",
   "slug": "sunday-classic",
@@ -220,3 +222,5 @@ export const routes = [
   "guidance": "Use this as the lunch and refreshment break: allow roughly 20 minutes for waiting and 40 minutes to order, eat and settle up. If the queue would consume your lunch break, choose somewhere convenient nearby and continue; no table is reserved. Aim to start lunch by 12:30 p.m. and leave by 1:30 p.m. Arrange a taxi/rideshare from a legal nearby pickup point toward Oracle Park."
 } }, sundayStops.oracle] },
 ];
+
+export const routes = sundayDinnerPolicy.routes(baseRoutes)

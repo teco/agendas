@@ -1,5 +1,7 @@
+import { sundayDinnerPolicy } from '../sundayDinner.js'
+
 // Approved content integrated September 2026. Preserve record IDs.
-export const sharedPlans = [
+const baseSharedPlans = [
   {
     "id": "sunday-dinner",
     "name": "Sunday Dinner — EPIC Steak",
@@ -70,3 +72,5 @@ export const sharedPlans = [
     "instructions": "Thursday, September 17: dinner venue and time TBD."
   }
 ];
+
+export const sharedPlans = sundayDinnerPolicy.sharedPlans(baseSharedPlans)

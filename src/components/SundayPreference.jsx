@@ -5,7 +5,7 @@ import { resolveContent } from '../utils/content.js'
 import { readPreference, savePreference } from '../utils/preference.js'
 
 const storageKey = client.sundayPreferenceKey
-const allowed = [...sunday.choices.map(choice => choice.id), 'dinner-only']
+const allowed = [...sunday.choices.map(choice => choice.id), ...(sunday.dinnerId ? ['dinner-only'] : [])]
 function storage() {
   try { return window.localStorage } catch { return null }
 }
@@ -13,7 +13,7 @@ function storage() {
 export default function SundayPreference({ sources }) {
   const [value, setValue] = useState(() => readPreference(storage(), storageKey, allowed))
   const [message, setMessage] = useState('')
-  const options = [...sunday.choices.map(choice => ({ id: choice.id, label: resolveContent(choice.content, sources).name })), { id: 'dinner-only', label: copy.dinnerOnly }]
+  const options = [...sunday.choices.map(choice => ({ id: choice.id, label: resolveContent(choice.content, sources).name })), ...(sunday.dinnerId ? [{ id: 'dinner-only', label: copy.dinnerOnly }] : [])]
   function choose(next) {
     setValue(next)
     const saved = savePreference(storage(), storageKey, next)
