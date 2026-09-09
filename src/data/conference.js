@@ -1,12 +1,14 @@
 import { events } from './events.js';
 import { client } from '#client-config';
-import { createTrackAgenda } from '../utils/tracks.js';
-export const trackAgenda = createTrackAgenda(events, client.tracks, client.favoriteAliases);
+import { createConferenceCollections } from '../utils/conferenceCollections.js';
 import { brazilSessions } from './brazil.js';
+import { claudeforceSessions } from './claudeforce.js';
+export const trackAgenda = createConferenceCollections(events, [...brazilSessions, ...claudeforceSessions], client);
 export const conferenceCopy = {
   views: [
     { value: 'all', label: 'Recommended Sessions' },
     { value: 'brazil', label: 'Brazil Sessions' },
+    { value: 'claudeforce', label: 'Claudeforce Sessions' },
     { value: 'recorded', label: 'Recorded Sessions' },
     { value: 'mySchedule', label: '★ My Schedule' },
   ],
@@ -20,9 +22,10 @@ export const conferenceCopy = {
   emptySchedule: 'Star a live session to add it to My Schedule.',
 };
 // Stable source IDs remain intact. Repeated catalog sessions at different times are distinct live choices.
-export const liveSessions = [...events, ...brazilSessions];
+export const liveSessions = [...events, ...brazilSessions, ...claudeforceSessions];
 export function sessionsForView(view, favorites = new Set(), track = null) {
   if (view === 'brazil') return brazilSessions;
-  if (view === 'mySchedule') return [...trackAgenda.saved(favorites, track), ...brazilSessions.filter(event => favorites.has(event.id) && trackAgenda.favoriteId(event.id) === event.id)];
+  if (view === 'claudeforce') return claudeforceSessions;
+  if (view === 'mySchedule') return trackAgenda.saved(favorites, track);
   return trackAgenda.forTrack(track);
 }

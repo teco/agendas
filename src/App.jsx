@@ -37,7 +37,7 @@ export default function App() {
           toggleFavorite={toggleFavorite}
         />
       ) : route?.id === 'home' ? (
-        <HomePage selectedDate={selectedTripDate} onDateChange={setSelectedTripDate} track={track} onTrackChange={setTrack} agendaEvents={agendaEvents} />
+        <HomePage onOpenClaudeforce={() => setFilter('claudeforce')} selectedDate={selectedTripDate} onDateChange={setSelectedTripDate} track={track} onTrackChange={setTrack} agendaEvents={agendaEvents} />
       ) : route?.id === 'sanFrancisco' ? (
         <SanFranciscoPage />
       ) : route?.id === 'sunday' ? (

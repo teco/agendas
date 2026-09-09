@@ -391,3 +391,18 @@ body {
 .agenda-track-options button:focus-visible{outline:3px solid #00a1e0;outline-offset:3px}
 .home-page .agenda-track-selector{margin:20px 0}
 .conference-client-brand-wide img{width:112px;height:auto;max-height:36px;border-radius:0}
+
+/* Homepage footer: responsive text keeps the heading editable and readable. */
+.claudeforce-home { margin: 32px 0 0; padding: 20px; background: #f0f4fc; border-radius: 16px; }
+.claudeforce-home h2 { margin: 0 0 8px; font-size: 1.5rem; line-height: 1.4; color: #032d60; font-weight: 700; }
+.claudeforce-booth { margin: 0 0 20px; color: #526271; line-height: 1.5; }
+.claudeforce-panels { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; }
+.claudeforce-panels > div { padding: 20px; border-radius: 16px; background: linear-gradient(115deg, #4031a7, #8624db); color: white; }
+.claudeforce-panels h3 { font-size: 1.125rem; line-height: 1.45; margin: 0; }
+.claudeforce-panels p { margin: 12px 0 0; font-size: .9375rem; line-height: 1.5; }
+.claudeforce-link { display: inline-flex; align-items: center; gap: 12px; min-height: 44px; margin-top: 12px; color: #032d60; font-weight: 700; text-decoration: underline; text-underline-offset: 3px; }
+@media (max-width: 800px) {
+  .claudeforce-home { padding: 16px; }
+  .claudeforce-home h2 { font-size: 1.25rem; }
+  .claudeforce-panels { grid-template-columns: 1fr; }
+}

@@ -54,7 +54,7 @@ export default function EventDetail({ event, recorded = false, isFavorited, onTo
   }, [])
   const isOnline = useOnlineStatus()
   const { accent, tint } = categoryColors[event.eventCategory] || categoryColors.suggested
-  const label = recorded ? 'Recorded session' : event.id.startsWith('br-') ? conferenceCopy.views.find(view => view.value === 'brazil').label : CATEGORY_LABELS[event.eventCategory] || 'Session'
+  const label = event.id.startsWith('cf-') ? 'Claudeforce session' : recorded ? 'Recorded session' : event.id.startsWith('br-') ? conferenceCopy.views.find(view => view.value === 'brazil').label : CATEGORY_LABELS[event.eventCategory] || 'Session'
 
   const locationParts = [event.room].filter(Boolean)
   const hasLocation = locationParts.length > 0

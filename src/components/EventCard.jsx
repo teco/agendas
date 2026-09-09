@@ -11,7 +11,7 @@ const CATEGORY_LABELS = {
 
 export default function EventCard({ event, recorded = false, isFavorited, onToggleFavorite, onSelect }) {
   const { accent, tint } = categoryColors[event.eventCategory] || categoryColors.suggested
-  const label = recorded ? event.topic : event.id.startsWith('br-') ? event.topic : CATEGORY_LABELS[event.eventCategory] || null
+  const label = event.id.startsWith('cf-') ? 'Claudeforce session' : recorded ? event.topic : event.id.startsWith('br-') ? event.topic : CATEGORY_LABELS[event.eventCategory] || null
 
   const locationParts = []
   if (event.room) locationParts.push(event.room)
