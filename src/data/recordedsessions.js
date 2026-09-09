@@ -15,7 +15,7 @@ export const recordedSessions = [
     type: "Learning Lab",
     topic: "Business",
     summary:
-      "Unified data applied to advertising: targeting, lookalike expansion and full-funnel measurement with governance attached. The retail-media and paid-channel angle on the same data foundation. <i>Also airs Wed 12:00 PM, Moscone North, LL, Campground, Theater 3.</i>",
+      "Unified data applied to paid media: who to target, how to expand from a seed audience, and measurement that follows the whole funnel — with governance attached. The retail-media angle on the same data foundation. <i>Also airs Wed 12:00 PM, Moscone North, LL, Campground, Theater 3.</i>",
     participants: null,
     registrationRequired: false,
     transitionWarning: null,
@@ -108,6 +108,26 @@ export const recordedSessions = [
   // WEDNESDAY, SEPTEMBER 16, 2026 — LIVE AIR DATE
   // ============================================================
   {
+    id: "vod-wed-sales-keynote-context-wins-the",
+    eventCategory: "also",
+    title: "Sales Keynote: Context Wins. The #1 CRM Works for You.",
+    date: "2026-09-16",
+    startTime: "09:00",
+    endTime: "09:50",
+    room: "Keynote - Hall B · Moscone South, LL",
+    area: "Keynote",
+    type: "Keynote",
+    topic: "Business",
+    summary:
+      "The sales mainstage, built on the argument that revenue breaks wherever context is lost — capturing buyer intent and holding it across every handoff. Notable for the Claudeforce announcement: the CRM running natively inside it, with Anthropic's Head of Americas and banking lead among the speakers alongside Sales Cloud leadership and customers.",
+    participants: null,
+    registrationRequired: false,
+    transitionWarning: null,
+    mapsUrl: null,
+    url: "https://event.salesforce.com/widget/plus/df26/1788950805769001r9hu/session/1781726986721001l0A3",
+    spotifyUrl: null,
+  },
+  {
     id: "vod-wed-financial-services-keynote-your-pilot",
     eventCategory: "also",
     title: "Financial Services Keynote: Your Pilot-to-Profit Playbook",
@@ -139,7 +159,7 @@ export const recordedSessions = [
     type: "Breakout Session",
     topic: "IT / Operations",
     summary:
-      "Configuring a voice agent that understands spoken requests, responds with Salesforce context, triggers workflows and stays inside defined guardrails. Build-level detail, not a demo.",
+      "Configuring a voice agent end to end: interpreting what a caller says, answering from Salesforce context, kicking off workflows, and staying inside the guardrails you set. Build-level detail, not a demo.",
     participants: null,
     registrationRequired: false,
     transitionWarning: null,
@@ -305,6 +325,26 @@ export const recordedSessions = [
     transitionWarning: null,
     mapsUrl: null,
     url: "https://event.salesforce.com/widget/plus/df26/1788623312409001h74x/session/1781726974670001ltzf",
+    spotifyUrl: null,
+  },
+  {
+    id: "vod-wed-the-qualified-keynote-generate-pipeline",
+    eventCategory: "also",
+    title: "The Qualified Keynote: Generate Pipeline at Scale",
+    date: "2026-09-16",
+    startTime: "16:00",
+    endTime: "16:50",
+    room: "Keynote - Room 2020 · Moscone West, L2",
+    area: "Keynote",
+    type: "Keynote",
+    topic: "Business",
+    summary:
+      "Pipeline generation at scale with Qualified: inbound conversations qualified and routed by agents rather than by forms and follow-up queues. Sales-side counterpart to the marketing keynotes.",
+    participants: null,
+    registrationRequired: false,
+    transitionWarning: null,
+    mapsUrl: null,
+    url: "https://event.salesforce.com/widget/plus/df26/1788623312409001h74x/session/1781726984632001lv98",
     spotifyUrl: null,
   },
   {

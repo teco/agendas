@@ -10,7 +10,7 @@ import { routeMaps } from '../src/data/routeMaps.js';
 
 test('Mercantil, Brazilian live sessions, and recordings stay in their intended collections', () => {
   assert.equal(client.id,'banco-mercantil');
-  assert.equal(events.length,20); assert.equal(brazilSessions.length,8); assert.equal(recordedSessions.length,24);
+  assert.equal(events.length,20); assert.equal(brazilSessions.length,8); assert.equal(recordedSessions.length,26);
   assert.equal(sessionsForView('all'),events); assert.equal(sessionsForView('brazil'),brazilSessions);
   const selected=new Set([events[0].id,brazilSessions[0].id,recordedSessions[0].id,'deleted']);
   assert.deepEqual(sessionsForView('mySchedule',selected),[events[0],brazilSessions[0]]);
