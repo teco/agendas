@@ -14,9 +14,9 @@ test('Mercantil, Brazilian live sessions, and recordings stay in their intended 
   assert.equal(sessionsForView('all'),events); assert.equal(sessionsForView('brazil'),brazilSessions);
   const selected=new Set([events[0].id,brazilSessions[0].id,recordedSessions[0].id,'deleted']);
   assert.deepEqual(sessionsForView('mySchedule',selected),[events[0],brazilSessions[0]]);
-  assert.equal(liveSessions.length,47);
+  assert.equal(liveSessions.length,50);
   assert.ok(!liveSessions.some(event=>event.id.startsWith('vod-')));
-  assert.equal(new Set(liveSessions.map(e=>e.id)).size,47);
+  assert.equal(new Set(liveSessions.map(e=>e.id)).size,50);
   assert.equal(conferenceCopy.recordedUrl,'https://www.salesforce.com/plus');
 });
 

@@ -12,7 +12,7 @@ import useVenueDate from '../hooks/useVenueDate.js'
 const dates = tripDates(trip)
 
 
-function TodayItem({ item }) {
+function TodayItem({ item, onOpenIndividual }) {
   const { reference, content } = item
   const isGuide = reference.kind === 'guide'
   const isAgenda = reference.kind === 'agendaEvent'
@@ -24,12 +24,12 @@ function TodayItem({ item }) {
       <h4>{content.title ?? content.name}</h4>
       {schedule?.startTime && <p className="today-time"><time dateTime={schedule.startTime}>{schedule.startTime}</time>{schedule.endTime && <>–<time dateTime={schedule.endTime}>{schedule.endTime}</time></>}</p>}
       {(content.description ?? content.shortDescription) && <p>{content.description ?? content.shortDescription}</p>}
-      {path && <a className="today-link" href={routeHref(path)}>{isAgenda ? copy.viewAgenda : isGuide ? copy.openGuide : copy.viewPlan} <span aria-hidden="true">→</span></a>}
+      {path && <a className="today-link" onClick={isAgenda && content.id.startsWith('ind-') ? onOpenIndividual : undefined} href={routeHref(path)}>{isAgenda ? copy.viewAgenda : isGuide ? copy.openGuide : copy.viewPlan} <span aria-hidden="true">→</span></a>}
     </li>
   )
 }
 
-export default function TodaySection({ selectedDate, onDateChange, agendaEvents = events, awaitingTrack = false }) {
+export default function TodaySection({ selectedDate, onDateChange, agendaEvents = events, awaitingTrack = false, onOpenIndividual }) {
   const currentDate = useVenueDate(trip.timeZone)
   const { date, period, isToday } = selectTripDay(currentDate, selectedDate, trip)
   const day = composeDay(date, dayPlans, createContentSources(agendaEvents), trip)
@@ -62,7 +62,7 @@ export default function TodaySection({ selectedDate, onDateChange, agendaEvents 
             <section className={`today-group today-group-${key}`} key={key} aria-labelledby={`today-${key}`}>
               <h3 id={`today-${key}`}>{label}</h3>
               {key === 'agenda' && day.agendaPending && <p className="today-empty">{awaitingTrack ? trackCopy.pending : copy.agendaPending}</p>}
-              {day[key].length > 0 && <ul className="today-cards">{day[key].map(item => <TodayItem key={`${item.reference.kind}:${item.reference.id}`} item={item} />)}</ul>}
+              {day[key].length > 0 && <ul className="today-cards">{day[key].map(item => <TodayItem onOpenIndividual={onOpenIndividual} key={`${item.reference.kind}:${item.reference.id}`} item={item} />)}</ul>}
             </section>
           )
         ))}

@@ -1,0 +1,89 @@
+/**
+ * INDIVIDUAL SESSIONS DATA FILE — src/data/mercantilsessions.js
+ * Banco Mercantil — Dreamforce 2026 private sessions
+ *
+ * Executive meetings, customer sessions and benchmarks scheduled outside the
+ * public catalog: Mini-CABs, SICs, Benchmark meetings and LATAM Lounge
+ * sessions. Not in any Salesforce export, so `url` is null throughout and
+ * nothing here can be verified against the catalog.
+ *
+ * NOTE ON DATES: this file may contain MONDAY, SEPTEMBER 14 — a day the public
+ * agenda does not cover. Any component that hardcodes Sep 15-17 will drop those
+ * rows.
+ *
+ * Same field schema as events.js, with two fixed differences:
+ * - eventCategory is always "oneOnOne"; these are private commitments, not
+ *   catalog sessions the attendee chooses between
+ * - registrationRequired is always false; attendance is by invitation
+ *
+ * Individual sessions take priority; no overlap warnings are displayed.
+ *
+ * EXPORT NAME IS `individualSessions` in every per-client file, so the
+ * rendering component stays identical across deployments.
+ */
+export const individualSessions = [
+  // ============================================================
+  // MONDAY, SEPTEMBER 14, 2026
+  // ============================================================
+  {
+    id: "ind-mon-marketing-goals-agent-mini-cab",
+    eventCategory: "oneOnOne",
+    title: "Marketing Goals Agent Mini-CAB",
+    date: "2026-09-14",
+    startTime: "15:30",
+    endTime: "16:30",
+    room: "C18 · 23rd Floor · Salesforce Tower",
+    area: null,
+    type: "Mini-CAB",
+    topic: null,
+    summary: null,
+    participants: null,
+    registrationRequired: false,
+    transitionWarning: null,
+    mapsUrl: "https://maps.google.com/?q=Salesforce+Tower,+415+Mission+St,+San+Francisco,+CA+94105",
+    url: null,
+    spotifyUrl: null,
+  },
+
+  // ============================================================
+  // TUESDAY, SEPTEMBER 15, 2026
+  // ============================================================
+  {
+    id: "ind-tue-let-s-talk-about-personalization",
+    eventCategory: "oneOnOne",
+    title: "Let's Talk About Personalization",
+    date: "2026-09-15",
+    startTime: "15:00",
+    endTime: "15:25",
+    room: "LATAM Lounge",
+    area: null,
+    type: "Customer session",
+    topic: null,
+    summary: null,
+    participants: null,
+    registrationRequired: false,
+    transitionWarning: null,
+    mapsUrl: null,
+    url: null,
+    spotifyUrl: null,
+  },
+  {
+    id: "ind-tue-salesforce-personalization-with-mercantil",
+    eventCategory: "oneOnOne",
+    title: "Salesforce Personalization with Mercantil",
+    date: "2026-09-15",
+    startTime: "15:30",
+    endTime: "16:00",
+    room: "LATAM Lounge",
+    area: null,
+    type: "Customer session",
+    topic: null,
+    summary: null,
+    participants: null,
+    registrationRequired: false,
+    transitionWarning: null,
+    mapsUrl: null,
+    url: null,
+    spotifyUrl: null,
+  },
+];
