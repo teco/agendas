@@ -32,7 +32,7 @@ test('each client receives only its own individual sessions; Pottencial has none
     const { events } = await import(`../src/data/clients/${id}/events.js`)
     const { createConferenceCollections } = await import('../src/utils/conferenceCollections.js')
     assert.equal(client.individualSessions, source)
-    assert.equal(source.length, 3)
+    assert.equal(source.length, id === 'banco-inter' ? 4 : 3)
     assert.ok(!source.some(e => e.id === 'ind-tue-salesforce-personalization-with-mercantil'))
     const agenda = createConferenceCollections(events, source, client)
     for (const track of [null, ...(client.tracks?.map(t => t.id) ?? [])]) {
