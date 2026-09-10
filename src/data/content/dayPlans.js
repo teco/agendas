@@ -1,3 +1,5 @@
+import { client } from '#client-config'
+import { applyClientDayPlans } from '../../utils/clientPlans.js'
 import { sundayDinnerPolicy } from '../sundayDinner.js'
 
 // Trip-day composition contains references only. Editorial copy stays at its source.
@@ -27,4 +29,4 @@ const baseDayPlans = [
   { date: '2026-09-19', primary: [], secondary: [], evening: [], notices: [] },
 ]
 
-export const dayPlans = sundayDinnerPolicy.dayPlans(baseDayPlans)
+export const dayPlans = applyClientDayPlans(sundayDinnerPolicy.dayPlans(baseDayPlans), client)

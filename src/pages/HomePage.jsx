@@ -8,7 +8,7 @@ import DestinationCard from '../components/DestinationCard.jsx'
 import WeatherSummary from '../components/WeatherSummary.jsx'
 import TodaySection from '../components/TodaySection.jsx'
 
-export default function HomePage({ selectedDate, onDateChange, track, onTrackChange, agendaEvents, onOpenClaudeforce, onOpenIndividual }) {
+export default function HomePage({ selectedDate, onDateChange, track, onTrackChange, agendaEvents, onOpenClaudeforce, onOpenIndividual, onOpenInnovation }) {
   return (
     <div className="companion-page home-page">
       <header className="week-hero">
@@ -23,7 +23,7 @@ export default function HomePage({ selectedDate, onDateChange, track, onTrackCha
       <section className="destination-grid" aria-label={homeCopy.destinationsLabel}>
         {destinations.map(destination => <DestinationCard key={destination.id} destination={destination} />)}
       </section>
-      <TodaySection onOpenIndividual={onOpenIndividual} selectedDate={selectedDate} onDateChange={onDateChange} agendaEvents={agendaEvents} awaitingTrack={trackAgenda.enabled && !track} />
+      <TodaySection onOpenInnovation={onOpenInnovation} onOpenIndividual={onOpenIndividual} selectedDate={selectedDate} onDateChange={onDateChange} agendaEvents={agendaEvents} awaitingTrack={trackAgenda.enabled && !track} />
       <ClaudeforceHome onOpen={onOpenClaudeforce} />
     </div>
   )

@@ -54,7 +54,7 @@ export default function EventDetail({ event, recorded = false, isFavorited, onTo
   }, [])
   const isOnline = useOnlineStatus()
   const { accent, tint } = categoryColors[event.eventCategory] || categoryColors.suggested
-  const label = event.id.startsWith('ind-') ? 'Individual session' : event.id.startsWith('cf-') ? 'Claudeforce session' : recorded ? 'Recorded session' : event.id.startsWith('br-') ? conferenceCopy.views.find(view => view.value === 'brazil').label : CATEGORY_LABELS[event.eventCategory] || 'Session'
+  const label = event.id.startsWith('it-') ? conferenceCopy.innovationLabel : event.id.startsWith('ind-') ? conferenceCopy.individualLabel : event.id.startsWith('cf-') ? 'Claudeforce session' : recorded ? 'Recorded session' : event.id.startsWith('br-') ? conferenceCopy.views.find(view => view.value === 'brazil').label : CATEGORY_LABELS[event.eventCategory] || 'Session'
 
   const locationParts = [event.room].filter(Boolean)
   const hasLocation = locationParts.length > 0
@@ -223,7 +223,7 @@ export default function EventDetail({ event, recorded = false, isFavorited, onTo
             )}
             {event.topic && (
               <div className="mb-2">
-                <span className="font-semibold">{recorded ? conferenceCopy.audience : event.id.startsWith('br-') ? conferenceCopy.company : 'Topic'}: </span>
+                <span className="font-semibold">{recorded ? conferenceCopy.audience : event.id.startsWith('br-') ? conferenceCopy.company : conferenceCopy.topicLabel}: </span>
                 <span>{event.topic}</span>
               </div>
             )}

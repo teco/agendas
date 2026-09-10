@@ -1,3 +1,4 @@
+import { conferenceCopy } from '../data/conference.js'
 import { categoryColors } from '../config.js'
 
 const CATEGORY_LABELS = {
@@ -11,7 +12,7 @@ const CATEGORY_LABELS = {
 
 export default function EventCard({ event, recorded = false, isFavorited, onToggleFavorite, onSelect }) {
   const { accent, tint } = categoryColors[event.eventCategory] || categoryColors.suggested
-  const label = event.id.startsWith('ind-') ? 'Individual session' : event.id.startsWith('cf-') ? 'Claudeforce session' : recorded ? event.topic : event.id.startsWith('br-') ? event.topic : CATEGORY_LABELS[event.eventCategory] || null
+  const label = event.id.startsWith('it-') ? conferenceCopy.innovationLabel : event.id.startsWith('ind-') ? conferenceCopy.individualLabel : event.id.startsWith('cf-') ? 'Claudeforce session' : recorded ? event.topic : event.id.startsWith('br-') ? event.topic : CATEGORY_LABELS[event.eventCategory] || null
 
   const locationParts = []
   if (event.room) locationParts.push(event.room)

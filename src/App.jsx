@@ -1,6 +1,6 @@
-import { useMemo, useState } from 'react'
+import { useEffect, useMemo, useState } from 'react'
 import { useAgendaTrack } from './hooks/useAgendaTrack.js'
-import { eventsForDay } from './data/conference.js'
+import { eventsForDay, innovationTour } from './data/conference.js'
 import AppShell from './components/AppShell.jsx'
 import AgendaPage from './pages/AgendaPage.jsx'
 import FoundationPage from './pages/FoundationPage.jsx'
@@ -25,6 +25,12 @@ export default function App() {
   const [track, setTrack] = useAgendaTrack()
   const agendaEvents = useMemo(() => eventsForDay(track), [track])
 
+  useEffect(() => {
+    if (route?.id === 'monday' && innovationTour.length) {
+      setFilter('innovation'); window.location.hash = '#/dreamforce';
+    }
+  }, [route?.id]);
+
   return (
     <AppShell route={route} path={path}>
       {route?.id === 'dreamforce' ? (
@@ -37,7 +43,7 @@ export default function App() {
           toggleFavorite={toggleFavorite}
         />
       ) : route?.id === 'home' ? (
-        <HomePage onOpenIndividual={() => setFilter('individual')} onOpenClaudeforce={() => setFilter('claudeforce')} selectedDate={selectedTripDate} onDateChange={setSelectedTripDate} track={track} onTrackChange={setTrack} agendaEvents={agendaEvents} />
+        <HomePage onOpenInnovation={() => setFilter('innovation')} onOpenIndividual={() => setFilter('individual')} onOpenClaudeforce={() => setFilter('claudeforce')} selectedDate={selectedTripDate} onDateChange={setSelectedTripDate} track={track} onTrackChange={setTrack} agendaEvents={agendaEvents} />
       ) : route?.id === 'sanFrancisco' ? (
         <SanFranciscoPage />
       ) : route?.id === 'sunday' ? (
@@ -47,7 +53,7 @@ export default function App() {
       ) : route?.contentRef ? (
         <ContentDetailPage reference={route.contentRef} />
       ) : route && Object.hasOwn(sfGuidePages, route.id) ? (
-        <SfGuidePage guideId={route.id} />
+        route.id === 'monday' && innovationTour.length ? null : <SfGuidePage guideId={route.id} />
       ) : (
         <FoundationPage route={route} />
       )}

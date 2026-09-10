@@ -1,3 +1,4 @@
+import { client } from '#client-config'
 import { sundayDinnerPolicy } from './sundayDinner.js'
 
 // Shared landing/guide summaries; Today references these records by ID.
@@ -36,7 +37,7 @@ export const sfCopy = {
   backLabel: 'Back to San Francisco',
 }
 
-export const sfSections = [
+const baseSfSections = [
   {
     "status": "ready",
     "id": "sunday",
@@ -103,6 +104,9 @@ export const sfSections = [
     "number": "07"
   }
 ];
+
+export const sfSections = baseSfSections.map(section => section.id === 'monday' && client.innovationTour?.length
+  ? { ...section, title: 'Innovation Tour', description: null } : section);
 
 export const weatherCopy = {
   location: 'SAN FRANCISCO WEATHER',

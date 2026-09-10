@@ -1,4 +1,6 @@
-export const trackCopy = {
+import { client } from '#client-config'
+
+const defaultCopy = {
   choose: 'Which agenda would you like to follow?',
   selected: 'Your Dreamforce agenda',
   introduction: 'Choose your recommendations. You can switch at any time.',
@@ -6,3 +8,5 @@ export const trackCopy = {
   pending: 'Choose an agenda above to see your recommended sessions.',
   schedule: 'Your saved sessions from both agendas and Brazil Sessions appear here.',
 }
+
+export const trackCopy = { ...defaultCopy, ...client.trackCopy }
