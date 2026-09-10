@@ -3,6 +3,7 @@ import { client } from '#client-config'
 import { useOnlineStatus } from '../hooks/useOnlineStatus.js'
 import { serviceCopy } from '../data/services.js'
 import PwaStatus from './PwaStatus.jsx'
+import BrandLogos from './BrandLogos.jsx'
 import { companionCopy, trip } from '../data/trip.js'
 import { routeHref, primaryRoutes } from '../routing/routes.js'
 
@@ -45,6 +46,7 @@ export default function AppShell({ route, path, children }) {
       </nav>
       {!isOnline && <p className="connection-banner" role="status">{serviceCopy.offline}</p>}
       <main id="page-content" ref={mainRef} tabIndex={-1}>
+        {route?.id !== 'dreamforce' && <div className="page-brand-header"><BrandLogos /></div>}
         {children}
       </main>
       <PwaStatus />

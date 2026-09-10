@@ -406,3 +406,9 @@ body {
   .claudeforce-home h2 { font-size: 1.25rem; }
   .claudeforce-panels { grid-template-columns: 1fr; }
 }
+
+/* Client and Salesforce branding on companion pages, aligned with their content. */
+.page-brand-header { padding: 1.5rem 1.25rem 0; background: #fff; }
+.page-brand-header .conference-brands { margin-bottom: 0; }
+@media (min-width: 640px) { .page-brand-header { padding: 2.5rem 2.5rem 0; } }
+@media (max-width: 359px) { .page-brand-header { padding-inline: 1rem; } }
