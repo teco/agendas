@@ -412,3 +412,20 @@ body {
 .page-brand-header .conference-brands { margin-bottom: 0; }
 @media (min-width: 640px) { .page-brand-header { padding: 2.5rem 2.5rem 0; } }
 @media (max-width: 359px) { .page-brand-header { padding-inline: 1rem; } }
+
+.home-individual-card {
+  display: block;
+  max-width: 34rem;
+  margin: 1.5rem auto;
+  padding: 1.5rem;
+  border-radius: 1.25rem;
+  background: #e5f1f5;
+  color: #032d60;
+  text-align: center;
+  font-size: clamp(1.5rem, 4vw, 2rem);
+  font-weight: 700;
+  line-height: 1.2;
+  text-decoration: none;
+}
+.home-individual-card:hover { background: #d8eaf1; }
+.home-individual-card:focus-visible { outline: 3px solid #00a1e0; outline-offset: 3px; }

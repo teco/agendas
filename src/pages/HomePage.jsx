@@ -1,3 +1,5 @@
+import { client } from '#client-config'
+import { routeHref } from '../routing/routes.js'
 import ClaudeforceHome from '../components/ClaudeforceHome.jsx'
 import AgendaTrackSelector from '../components/AgendaTrackSelector.jsx'
 import { trackAgenda } from '../data/conference.js'
@@ -17,9 +19,14 @@ export default function HomePage({ selectedDate, onDateChange, track, onTrackCha
         <p className="trip-dates">{trip.dateLabel}</p>
         <p className="welcome-copy">{homeCopy.welcome}</p>
       </header>
-      <AgendaTrackSelector track={track} onChange={onTrackChange} />
+      {!client.homeIndividualCard && <AgendaTrackSelector track={track} onChange={onTrackChange} />}
       <div className="sf-waterfront home-waterfront"><img src={waterfront} alt={sfCopy.imageAlt} width="1200" height="630" /></div>
       <WeatherSummary />
+      {client.homeIndividualCard && (
+        <a className="home-individual-card" href={routeHref('/dreamforce')} onClick={onOpenIndividual}>
+          {client.individualSessionsLabel}
+        </a>
+      )}
       <section className="destination-grid" aria-label={homeCopy.destinationsLabel}>
         {destinations.map(destination => <DestinationCard key={destination.id} destination={destination} />)}
       </section>

@@ -11,16 +11,18 @@ import { trip } from '../src/data/trip.js'
 import { toUtcComponents } from '../src/utils/calendar.js'
 
 const data = createConferenceData(events, client)
-test('Agibank has three named agendas and seven correctly ordered collections', () => {
+test('Agibank has three tracks and seven correctly ordered collections', () => {
   assert.deepEqual(data.conferenceCopy.views.map(v => v.label), ['Recommended Sessions','Agibank @ Dreamforce','Innovation Tour','Brazil Sessions','Claudeforce Sessions','Recorded Sessions','★ My Schedule'])
   assert.equal(data.sessionsForView('all').length,0)
-  for (const [id,name,count] of [['lucas-akira','Lucas Akira',14],['matheus-girardi','Matheus Girardi',15],['fabio-zani','Fábio Zani',17]]) {
+  for (const [id,name,count] of [['lucas-akira','Business Track',14],['matheus-girardi','Executive Track',15],['fabio-zani','Tech Track',17]]) {
     const recommended=data.sessionsForView('all',new Set(),id)
     assert.equal(recommended.length,count)
     assert.ok(recommended.every(e=>e.topic===name))
-    assert.equal(data.sessionsForView('individual',new Set(),id).length,14)
+    assert.equal(data.sessionsForView('individual',new Set(),id).length,13)
     assert.equal(data.sessionsForView('innovation',new Set(),id).length,11)
   }
+  assert.equal(client.homeIndividualCard,true)
+  assert.equal(client.trackPreferenceKey,'df26-agibank-person')
   assert.deepEqual(client.teamContacts,[])
   assert.equal(client.whatsappNumber,null)
 })
@@ -72,5 +74,28 @@ test('Agibank confirmed end times remain usable for calendar export without edit
     assert.equal(Object.keys(e).length,17)
     assert.equal(e.transitionWarning,null)
     assert.doesNotMatch(e.summary??'',/Title corrected|End time assumed/i)
+  }
+})
+
+
+test('Agibank moved meetings retain saved identity and the removed Charly meeting disappears', () => {
+  const movedId = 'ind-wed-meeting-with-charly-and-franchi'
+  const removedId = 'ind-wed-meeting-with-charly'
+  const moved = client.individualSessions.find(e => e.id === movedId)
+  assert.equal(moved.date, '2026-09-17')
+  assert.equal(moved.startTime, '11:15')
+  assert.equal(moved.endTime, '12:00')
+  assert.equal(toUtcComponents(moved.date,moved.startTime).iso,'2026-09-17T18:15:00Z')
+  const analyst = client.individualSessions.find(e => e.id === 'ind-wed-industry-analyst-1-1s')
+  assert.equal(analyst.startTime,'13:30')
+  assert.equal(analyst.endTime,'14:00')
+  for (const track of [null, ...client.tracks.map(t => t.id)]) {
+    const saved = data.sessionsForView('mySchedule',new Set([movedId,removedId]),track)
+    assert.deepEqual(saved,[moved])
+    const sources = createContentSources(data.eventsForDay(track))
+    const wed = composeDay('2026-09-16',dayPlans,sources,trip)
+    const thu = composeDay('2026-09-17',dayPlans,sources,trip)
+    assert.ok(!wed.agenda.some(e => [movedId,removedId].includes(e.content.id)))
+    assert.equal(thu.agenda.filter(e => e.content.id === movedId).length,1)
   }
 })
