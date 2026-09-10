@@ -18,9 +18,20 @@
  * deliberately and are flagged in `transitionWarning` for the attendee to
  * resolve in My Schedule.
  *
- * Session data comes from the XP catalog export (widget 1788950805769001r9hu).
- * Six sessions sit outside Dreamforce_2026_Sessions.md and are sourced from
- * that export alone.
+ * Session data comes from the XP catalog export (widget 1788950805769001r9hu),
+ * updated against a later catalog pull. Six sessions sit outside
+ * Dreamforce_2026_Sessions.md and are sourced from that export alone.
+ *
+ * TWO CHANGES FROM THE LATER PULL:
+ * - "From the Field: Driving Action at Scale With Sales Programs" was moved by
+ *   Salesforce from Wed 3:00 PM (Moscone West, L2, Theater 5) to Wed 1:00 PM
+ *   (Content Pavilion, Stage 6). The new slot is used.
+ * - Three rows added: the Agentforce Voice sneak peek, the Agentforce Voice
+ *   deployment roundtable, and the Financial Services hands-on workshop. The
+ *   sneak peek runs twice; only the Thursday 12:30 slot is taken, because the
+ *   Tuesday 12:30 slot collided with the Enterprise AI Harness keynote. No
+ *   catalog URL exists for these three sessions in any export on hand, so url
+ *   is null on those three rows.
  */
 export const events = [
   // ============================================================
@@ -100,12 +111,33 @@ export const events = [
     type: "Keynote",
     topic: null,
     summary:
-      "Salesforce's vision for the Agentic Enterprise and the trusted capabilities behind it — context, agency, action, governance, security and AI control treated as one layer.",
+      "Salesforce sets out how it sees the Agentic Enterprise and the trusted capabilities underneath it: context, agency, action, governance, security and control over AI, presented as one layer rather than separate features.",
     participants: null,
     registrationRequired: false,
     transitionWarning: null,
     mapsUrl: null,
     url: "https://event.salesforce.com/widget/plus/df26/1788950805769001r9hu/session/1781726975414001ljr5",
+    spotifyUrl: null,
+  },
+  {
+    id: "tue-agentforce-voice-lessons-from-real",
+    eventCategory: "suggested",
+    title: "Agentforce Voice: Lessons From Real-World Deployments",
+    date: "2026-09-15",
+    startTime: "14:30",
+    endTime: "15:30",
+    room: "Roundtable 2 · Grand Ballroom A · InterCon, L3",
+    area: null,
+    type: "Roundtable",
+    topic: null,
+    summary:
+      "CX and IT leaders comparing notes on deploying Agentforce Voice: picking the use cases worth doing first, the tradeoffs they hit, and what governance and scaling took across the enterprise.",
+    participants: null,
+    registrationRequired: true,
+    transitionWarning:
+      "Runs against Reimagine High-Touch Relationships in Financial Services (3:00 PM). Only one can be attended live — keep the one you want in My Schedule.",
+    mapsUrl: "https://maps.google.com/?q=InterContinental+San+Francisco,+888+Howard+St,+San+Francisco,+CA+94103",
+    url: null,
     spotifyUrl: null,
   },
   {
@@ -123,7 +155,8 @@ export const events = [
       "Agentic Advisor putting AI to work for financial professionals, so the system serves the advisor rather than adding another place to work, and high-touch service scales to every client.",
     participants: null,
     registrationRequired: false,
-    transitionWarning: null,
+    transitionWarning:
+      "Runs against Agentforce Voice: Lessons From Real-World Deployments (2:30 PM). Only one can be attended live — keep the one you want in My Schedule.",
     mapsUrl: null,
     url: "https://event.salesforce.com/widget/plus/df26/1788950805769001r9hu/session/1779891406476001PMGV",
     spotifyUrl: null,
@@ -248,7 +281,7 @@ export const events = [
     type: "Campground",
     topic: null,
     summary:
-      "What RCS adds over SMS — verified sender identity, rich media and native two-way conversation — and the engagement and conversion effect that follows.",
+      "What RCS adds over SMS — a sender identity the carrier has verified, richer media, and conversation that runs both ways natively — and the engagement and conversion effect that follows.",
     participants: null,
     registrationRequired: false,
     transitionWarning: null,
@@ -277,6 +310,48 @@ export const events = [
     spotifyUrl: null,
   },
   {
+    id: "wed-from-the-field-driving-action",
+    eventCategory: "suggested",
+    title: "From the Field: Driving Action at Scale With Sales Programs",
+    date: "2026-09-16",
+    startTime: "13:00",
+    endTime: "13:20",
+    room: "Stage 6 · Content Pavilion · Moscone South, LL",
+    area: null,
+    type: "Content Pavilion",
+    topic: null,
+    summary:
+      "Edward Jones activating advisors through a targeted programme approach, and how an emerging headless strategy is producing a more connected advisor experience.",
+    participants: null,
+    registrationRequired: false,
+    transitionWarning:
+      "Runs against Get Hands-On with Agentforce for Financial Services (1:00 PM). Only one can be attended live — keep the one you want in My Schedule.",
+    mapsUrl: null,
+    url: "https://event.salesforce.com/widget/plus/df26/1788950805769001r9hu/session/1779838963271001GTtJ",
+    spotifyUrl: null,
+  },
+  {
+    id: "wed-get-hands-on-with-agentforce",
+    eventCategory: "suggested",
+    title: "Get Hands-On with Agentforce for Financial Services",
+    date: "2026-09-16",
+    startTime: "13:00",
+    endTime: "14:00",
+    room: "Room 2000 · Moscone West, L2",
+    area: null,
+    type: "Breakout Session",
+    topic: null,
+    summary:
+      "A working session building real sales or service applications in Agentforce for Financial Services, aimed at getting more out of an existing investment rather than introducing the product.",
+    participants: null,
+    registrationRequired: true,
+    transitionWarning:
+      "Runs against From the Field: Driving Action at Scale With Sales Programs (1:00 PM). Only one can be attended live — keep the one you want in My Schedule.",
+    mapsUrl: null,
+    url: null,
+    spotifyUrl: null,
+  },
+  {
     id: "wed-aiforce-keynote-anywhere-humans-and",
     eventCategory: "suggested",
     title: "AIforce Keynote: Anywhere Humans and Agents Work",
@@ -288,33 +363,12 @@ export const events = [
     type: "Keynote",
     topic: null,
     summary:
-      "AIforce framed around the AI you want, the trust you need and enterprise-grade return, with a look at the headless capabilities underneath and customers running Salesforce anywhere.",
+      "AIforce framed around three demands: the AI a business actually wants, trust it can rely on, and return the enterprise can measure. Includes a look at the headless capabilities underneath and customers running Salesforce anywhere.",
     participants: null,
     registrationRequired: false,
     transitionWarning: null,
     mapsUrl: null,
     url: "https://event.salesforce.com/widget/plus/df26/1788950805769001r9hu/session/1781726973233001l5xc",
-    spotifyUrl: null,
-  },
-  {
-    id: "wed-from-the-field-driving-action",
-    eventCategory: "suggested",
-    title: "From the Field: Driving Action at Scale With Sales Programs",
-    date: "2026-09-16",
-    startTime: "15:00",
-    endTime: "15:20",
-    room: "Theater 5 · Moscone West, L2",
-    area: null,
-    type: "Theater Session",
-    topic: null,
-    summary:
-      "Edward Jones activating advisors through a targeted programme approach, and how an emerging headless strategy is producing a more connected advisor experience.",
-    participants: null,
-    registrationRequired: false,
-    transitionWarning:
-      "Runs against Roadmap Session: Agentforce Innovations for Banking & Wealth (3:00 PM). Only one can be attended live — keep the one you want in My Schedule.",
-    mapsUrl: null,
-    url: "https://event.salesforce.com/widget/plus/df26/1788950805769001r9hu/session/1779838963271001GTtJ",
     spotifyUrl: null,
   },
   {
@@ -332,8 +386,7 @@ export const events = [
       "What is coming in Agentforce Financial Services across banking, wealth and asset management — agents and product innovations, previewed from the roadmap.",
     participants: null,
     registrationRequired: false,
-    transitionWarning:
-      "Runs against From the Field: Driving Action at Scale With Sales Programs (3:00 PM). Only one can be attended live — keep the one you want in My Schedule.",
+    transitionWarning: null,
     mapsUrl: "https://maps.google.com/?q=Metreon,+135+4th+St,+San+Francisco,+CA+94103",
     url: "https://event.salesforce.com/widget/plus/df26/1788950805769001r9hu/session/1779839115855001GJCp",
     spotifyUrl: null,
@@ -374,7 +427,7 @@ export const events = [
     type: "Theater Session",
     topic: null,
     summary:
-      "Without context, bad decisions just get automated faster. Data 360's MCP server and skills turn any agent into a business expert on any surface, with governance and permissions built in.",
+      "Without context, bad decisions just get automated faster. The MCP server and skills inside Data 360 make any agent a business expert wherever it runs, with permissions and governance enforced throughout.",
     participants: null,
     registrationRequired: false,
     transitionWarning: null,
@@ -414,7 +467,7 @@ export const events = [
     type: "Theater Session",
     topic: null,
     summary:
-      "The shift from AI insight to agentic execution in financial advice, and how firms expand advisor capacity, deepen relationships and grow assets under management.",
+      "Financial advice moving past AI that only informs, toward agents that execute — and how firms use that to expand advisor capacity, deepen client relationships and grow assets under management.",
     participants: null,
     registrationRequired: false,
     transitionWarning:
@@ -442,6 +495,26 @@ export const events = [
       "Runs against Agentic Wealth & Asset Management: Grow Relationships & AUM (11:00 AM). Only one can be attended live — keep the one you want in My Schedule.",
     mapsUrl: null,
     url: "https://event.salesforce.com/widget/plus/df26/1788950805769001r9hu/session/1781726983251001lIFg",
+    spotifyUrl: null,
+  },
+  {
+    id: "thu-sneak-peek-what-s-next",
+    eventCategory: "suggested",
+    title: "Sneak Peek: What's Next for Agentforce Voice",
+    date: "2026-09-17",
+    startTime: "12:30",
+    endTime: "12:50",
+    room: "Sneak Peeks · Moscone West, L1 Trailblazer Forest",
+    area: null,
+    type: "Sneak Peek",
+    topic: null,
+    summary:
+      "Upcoming capabilities for testing and tuning AI voice agents — real-time audio intelligence, sentiment detection and voice simulation — with a live Q&A alongside the product team.",
+    participants: null,
+    registrationRequired: false,
+    transitionWarning: null,
+    mapsUrl: null,
+    url: null,
     spotifyUrl: null,
   },
   {

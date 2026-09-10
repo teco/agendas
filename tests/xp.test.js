@@ -12,9 +12,9 @@ import { composeDay } from '../src/utils/today.js'
 import { trip } from '../src/data/trip.js'
 import { readPreference } from '../src/utils/preference.js'
 
-test('XP uses its 24 complete source records as a single agenda with distinct repeat occurrences', () => {
-  assert.equal(events.length, 24)
-  assert.equal(new Set([...events, ...brazilSessions].map(event => event.id)).size, 32)
+test('XP uses its 27 complete source records as a single agenda with distinct repeat occurrences', () => {
+  assert.equal(events.length, 27)
+  assert.equal(new Set([...events, ...brazilSessions].map(event => event.id)).size, 35)
   assert.equal(xp.tracks, undefined)
   assert.deepEqual(xp.teamContacts, mercantil.teamContacts)
   assert.equal(xp.whatsappNumber, mercantil.whatsappNumber)
@@ -25,7 +25,7 @@ test('XP uses its 24 complete source records as a single agenda with distinct re
     assert.equal(event.area, null)
     assert.ok(event.startTime < event.endTime)
   }
-  for (const [date, count] of [['2026-09-15', 7], ['2026-09-16', 9], ['2026-09-17', 8]])
+  for (const [date, count] of [['2026-09-15', 8], ['2026-09-16', 10], ['2026-09-17', 9]])
     assert.equal(composeDay(date, dayPlans, createContentSources(events), trip).agenda.length, count)
   let overlaps = 0
   for (let i = 0; i < events.length; i++) for (const other of events.slice(i + 1)) {
@@ -35,7 +35,7 @@ test('XP uses its 24 complete source records as a single agenda with distinct re
       assert.ok(event.transitionWarning && other.transitionWarning)
     }
   }
-  assert.equal(overlaps, 6)
+  assert.equal(overlaps, 7)
 })
 
 test('XP removes Sunday dinner across plans, routes and maps without altering the other clients', () => {
@@ -67,4 +67,25 @@ test('XP removes Sunday dinner across plans, routes and maps without altering th
   assert.equal(existing.dayPlans(dayPlans), dayPlans)
   assert.equal(existing.routeMaps(routeMaps), routeMaps)
   assert.equal(readPreference({ getItem: () => 'dinner-only' }, xp.sundayPreferenceKey, ['classic', 'giants', 'both']), null)
+})
+
+
+test('XP rescheduled recommendation retains its saved identity and calendar date', async () => {
+  const {createConferenceData} = await import('../src/data/conference.js')
+  const {toUtcComponents} = await import('../src/utils/calendar.js')
+  const data=createConferenceData(events,xp)
+  const id='wed-from-the-field-driving-action'
+  const saved=data.sessionsForView('mySchedule',new Set([id]))
+  assert.equal(saved.length,1)
+  assert.equal(saved[0].startTime,'13:00')
+  assert.equal(saved[0].endTime,'13:20')
+  assert.equal(saved[0].room,'Stage 6 · Content Pavilion · Moscone South, LL')
+  assert.equal(toUtcComponents(saved[0].date,saved[0].startTime).iso,'2026-09-16T20:00:00Z')
+  assert.equal(data.sessionsForView('individual').length,3)
+  for(const id of ['tue-agentforce-voice-lessons-from-real','wed-get-hands-on-with-agentforce','thu-sneak-peek-what-s-next']) {
+    const event=events.find(e=>e.id===id)
+    assert.ok(event)
+    assert.equal(event.url,null)
+    assert.deepEqual(data.sessionsForView('mySchedule',new Set([id])),[event])
+  }
 })
