@@ -1,6 +1,7 @@
 import { trip } from '../data/trip.js'
 import { todayCopy as copy, earlyArrivalCard, eveningFirstDates } from '../data/today.js'
 import { events } from '../data/events.js'
+import { conferenceCopy } from '../data/conference.js'
 import { trackCopy } from '../data/tracks.js'
 import { createContentSources, dayPlans } from '../data/content/index.js'
 import { formatEventDate } from '../utils/date.js'
@@ -33,11 +34,21 @@ export default function TodaySection({ selectedDate, onDateChange, agendaEvents 
   const currentDate = useVenueDate(trip.timeZone)
   const { date, period, isToday } = selectTripDay(currentDate, selectedDate, trip)
   const day = composeDay(date, dayPlans, createContentSources(agendaEvents), trip)
+  const tourItems = day.agenda.filter(item => item.content.id.startsWith('it-'))
+  if (tourItems.length) {
+    const otherItems = day.agenda.filter(item => !item.content.id.startsWith('it-'))
+    day.innovation = tourItems
+    day.agenda = otherItems.filter(item => item.content.eventCategory !== 'social')
+    day.evening = [...day.evening, ...otherItems.filter(item => item.content.eventCategory === 'social')]
+  }
   const title = period === 'before' ? copy.preview : period === 'after' ? copy.recap : isToday ? copy.today : copy.selected
   const context = period === 'before' ? copy.beforeTrip : period === 'after' ? copy.afterTrip : !isToday ? copy.previewDay : null
-  const empty = !day.agendaPending && ['agenda', 'primary', 'secondary', 'evening', 'notices'].every(key => day[key].length === 0)
+  const empty = !tourItems.length && !day.agendaPending && ['agenda', 'primary', 'secondary', 'evening', 'notices'].every(key => day[key].length === 0)
   const earlyArrival = date < earlyArrivalCard.beforeDate
-  const groupEntries = Object.entries(copy.groups)
+  const groupEntries = [
+    ...(tourItems.length ? [['innovation', conferenceCopy.innovationLabel]] : []),
+    ...Object.entries(copy.groups),
+  ]
   const orderedGroups = eveningFirstDates.includes(date)
     ? [...groupEntries.filter(([key]) => key === 'evening'), ...groupEntries.filter(([key]) => key !== 'evening')]
     : groupEntries
