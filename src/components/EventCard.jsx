@@ -62,7 +62,7 @@ export default function EventCard({ event, recorded = false, isFavorited, onTogg
       {/* Row 1 — time */}
       <div className="pr-10 pointer-events-none relative">
         <span className="text-sm" style={{ color: '#374151' }}>
-          {!recorded && `${event.startTime}–${event.endTime}`}
+          {!recorded && `${event.startTime}${event.endTime ? `–${event.endTime}` : ''}`}
         </span>
       </div>
 

@@ -2,6 +2,7 @@ import { individualSessions } from './individualSessions.js';
 
 export const client = {
   individualSessions,
+  individualSessionsLabel: 'Inter @ Dreamforce',
   id: 'banco-inter',
   name: 'Inter',
   agendaTitle: 'Inter @ Dreamforce 2026',

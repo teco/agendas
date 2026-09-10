@@ -61,7 +61,8 @@ export default function EventDetail({ event, recorded = false, isFavorited, onTo
   const location = locationParts.join(', ')
 
   const startUtc = toUtcComponents(event.date, event.startTime)
-  const endUtc   = toUtcComponents(event.date, event.endTime)
+  // A start-only commitment has no invented duration in calendar exports.
+  const endUtc   = toUtcComponents(event.date, event.endTime ?? event.startTime)
 
   const gcalUrl =
     'https://calendar.google.com/calendar/render?action=TEMPLATE' +
@@ -179,7 +180,7 @@ export default function EventDetail({ event, recorded = false, isFavorited, onTo
           {/* Date / time / location */}
           <div className="mt-3 text-sm" style={{ color: '#374151' }}>
             {!recorded && <div>{formatEventDate(event.date)}</div>}
-            {!recorded && <div>{event.startTime} – {event.endTime} · San Francisco time</div>}
+            {!recorded && <div>{event.startTime}{event.endTime && ` – ${event.endTime}`} · San Francisco time</div>}
             {!recorded && hasLocation && <div className="mt-1">{locationParts.join(' · ')}</div>}
           </div>
 

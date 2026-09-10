@@ -6,14 +6,14 @@ import { composeDay } from '../src/utils/today.js'
 import { trip } from '../src/data/trip.js'
 
 test('Mercantil individual sessions preserve Monday, field contract and second tab position', () => {
-  assert.equal(individualSessions.length, 3)
+  assert.equal(individualSessions.length, 4)
   assert.equal(sessionsForView('individual'), individualSessions)
   assert.equal(conferenceCopy.views[1].value, 'individual')
   const sources = createContentSources(eventsForDay(null))
   const monday = composeDay('2026-09-14', dayPlans, sources, trip)
   assert.deepEqual(monday.agenda.map(e => e.content.id), [individualSessions[0].id])
   const tuesday = composeDay('2026-09-15', dayPlans, sources, trip)
-  assert.equal(tuesday.agenda.filter(e => e.content.eventCategory === 'oneOnOne').length, 2)
+  assert.equal(tuesday.agenda.filter(e => e.content.eventCategory === 'oneOnOne').length, 3)
   for (const event of individualSessions) {
     assert.equal(Object.keys(event).length,17)
     assert.equal(event.url,null)
@@ -32,7 +32,7 @@ test('each client receives only its own individual sessions; Pottencial has none
     const { events } = await import(`../src/data/clients/${id}/events.js`)
     const { createConferenceCollections } = await import('../src/utils/conferenceCollections.js')
     assert.equal(client.individualSessions, source)
-    assert.equal(source.length, id === 'banco-inter' ? 4 : 3)
+    assert.equal(source.length, ({ acerto: 5, 'banco-inter': 7, xp: 3 })[id])
     assert.ok(!source.some(e => e.id === 'ind-tue-salesforce-personalization-with-mercantil'))
     const agenda = createConferenceCollections(events, source, client)
     for (const track of [null, ...(client.tracks?.map(t => t.id) ?? [])]) {
@@ -56,7 +56,7 @@ test('each client receives only its own individual sessions; Pottencial has none
     if (id === 'xp') {
       const benchmarks = source.filter(e => e.type === 'Benchmark')
       assert.equal(benchmarks.length,2)
-      assert.ok(benchmarks.every(e => e.room === null && e.participants))
+      assert.ok(benchmarks.every(e => e.room === 'Moscone Center South, Level 1, Room 101' && e.participants))
     }
   }
   const { client } = await import('../src/data/clients/pottencial/config.js')

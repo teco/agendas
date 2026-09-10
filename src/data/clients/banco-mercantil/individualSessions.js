@@ -86,4 +86,23 @@ export const individualSessions = [
     url: null,
     spotifyUrl: null,
   },
+  {
+    "id": "ind-tue-benchmark-meet-ifood-agents",
+    "eventCategory": "oneOnOne",
+    "title": "Benchmark: Meet iFood Agents",
+    "date": "2026-09-15",
+    "startTime": "12:30",
+    "endTime": "13:30",
+    "room": "Moscone Center South, Level 1, Room 101",
+    "area": null,
+    "type": "Benchmark",
+    "topic": null,
+    "summary": "<b>Product Focus:</b> Agentforce &amp; Data 360",
+    "participants": "André Aparecido (Cidão), CRM Manager & Denize Leite (Pimenta), CRM Coordinator",
+    "registrationRequired": false,
+    "transitionWarning": null,
+    "mapsUrl": "https://maps.google.com/?q=Moscone+Center+South,+San+Francisco",
+    "url": null,
+    "spotifyUrl": null
+  },
 ];

@@ -2,6 +2,7 @@ import { individualSessions } from './individualSessions.js';
 
 export const client = {
   individualSessions,
+  individualSessionsLabel: 'XP @ Dreamforce',
   id: 'xp',
   name: 'XP',
   agendaTitle: 'XP @ Dreamforce 2026',
