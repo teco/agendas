@@ -25,9 +25,40 @@ test('Mercantil individual sessions preserve Monday, field contract and second t
   }
 })
 
-test('Mercantil private sessions are not attached to any other client', async () => {
-  for (const id of ['acerto','banco-inter','xp','pottencial']) {
-    const {client} = await import(`../src/data/clients/${id}/config.js`)
-    assert.equal(client.individualSessions,undefined)
+test('each client receives only its own individual sessions; Pottencial has none', async () => {
+  for (const id of ['acerto', 'banco-inter', 'xp']) {
+    const { client } = await import(`../src/data/clients/${id}/config.js`)
+    const { individualSessions: source } = await import(`../src/data/clients/${id}/individualSessions.js`)
+    const { events } = await import(`../src/data/clients/${id}/events.js`)
+    const { createConferenceCollections } = await import('../src/utils/conferenceCollections.js')
+    assert.equal(client.individualSessions, source)
+    assert.equal(source.length, 3)
+    assert.ok(!source.some(e => e.id === 'ind-tue-salesforce-personalization-with-mercantil'))
+    const agenda = createConferenceCollections(events, source, client)
+    for (const track of [null, ...(client.tracks?.map(t => t.id) ?? [])]) {
+      for (const event of source) {
+        assert.equal(event.transitionWarning, null)
+        assert.equal(Object.keys(event).length, 17)
+        assert.deepEqual(agenda.saved(agenda.toggle(new Set(),event.id), track), [event])
+      }
+      const dayEvents = [...agenda.forTrack(track), ...source]
+      for (const event of source) {
+        const day = composeDay(event.date, dayPlans, createContentSources(dayEvents), trip)
+        assert.ok(day.agenda.some(item => item.content.id === event.id))
+      }
+    }
+    if (id === 'banco-inter') {
+      const sics = source.filter(e => e.type === 'SIC')
+      const selected = new Set(sics.map(e => e.id))
+      assert.equal(agenda.saved(selected,'business').length,2)
+      assert.equal(agenda.saved(selected,'operations').length,2)
+    }
+    if (id === 'xp') {
+      const benchmarks = source.filter(e => e.type === 'Benchmark')
+      assert.equal(benchmarks.length,2)
+      assert.ok(benchmarks.every(e => e.room === null && e.participants))
+    }
   }
+  const { client } = await import('../src/data/clients/pottencial/config.js')
+  assert.equal(client.individualSessions,undefined)
 })

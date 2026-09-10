@@ -1,4 +1,7 @@
+import { individualSessions } from './individualSessions.js';
+
 export const client = {
+  individualSessions,
   id: 'acerto',
   name: 'Acerto',
   agendaTitle: 'Acerto @ Dreamforce 2026',
